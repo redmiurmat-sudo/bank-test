@@ -26,7 +26,7 @@ import { QRScanner } from './QRScanner';
 import { TransferByQR } from './TransferByQR';
 import { Transaction } from '../types';
 
-// Custom icons matching the reference image style
+// Кастомные иконки, соответствующие референсу
 const HomeIconCustom = ({ active }: { active: boolean }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
     <path 
@@ -432,7 +432,7 @@ export const Dashboard: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white font-sans overflow-y-auto pb-24 selection:bg-blue-500/30">
+    <div className="flex flex-col h-screen bg-black text-white font-sans overflow-y-auto pb-20 selection:bg-blue-500/30">
       {/* Top Header */}
       {activeTab !== 'history' && (activeTab !== 'payments') && (
         <header className="flex items-center justify-between px-4 pt-3 pb-1 shrink-0">
@@ -468,12 +468,12 @@ export const Dashboard: React.FC = () => {
         )}
       </main>
 
-      {/* REFINED NAVIGATION BAR - LOWERED AND COMPACTED */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-[#212121] border-t border-white/[0.03] px-1 pt-1 pb-1 flex justify-between items-end z-50">
+      {/* REFINED NAVIGATION BAR - MAXIMUM LOWERED POSITION */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-[#212121] border-t border-white/[0.03] px-1 pt-0.5 pb-0 flex justify-between items-end z-50 h-[64px]">
         {/* Главная */}
         <button 
           onClick={() => setActiveTab('home')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0.5 pt-1"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
         >
           <HomeIconCustom active={activeTab === 'home'} />
           <span className={`text-[9px] font-medium transition-colors ${activeTab === 'home' ? 'text-white' : 'text-[#7b7b7b]'}`}>
@@ -484,7 +484,7 @@ export const Dashboard: React.FC = () => {
         {/* Платежи */}
         <button 
           onClick={() => setActiveTab('payments')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0.5 pt-1"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
         >
           <Wallet className={`w-5.5 h-5.5 ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`} />
           <span className={`text-[9px] font-medium transition-colors ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`}>
@@ -493,12 +493,12 @@ export const Dashboard: React.FC = () => {
         </button>
         
         {/* QR-код (Center) - Lowered relative offset */}
-        <div className="flex flex-col items-center flex-1 relative -top-2">
+        <div className="flex flex-col items-center flex-1 relative -top-1.5">
           <button 
             onClick={() => setShowScanner(true)}
-            className="bg-[#2264f1] w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.4)] active:scale-95 transition-transform"
+            className="bg-[#2264f1] w-[58px] h-[58px] rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.4)] active:scale-95 transition-transform"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                <path d="M4 8V4H8M16 4H20V8M20 16V20H16M8 20H4V16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                <rect x="9" y="9" width="2" height="2" rx="0.5" fill="currentColor"/>
                <rect x="13" y="9" width="2" height="2" rx="0.5" fill="currentColor"/>
@@ -512,7 +512,7 @@ export const Dashboard: React.FC = () => {
         {/* История */}
         <button 
           onClick={() => setActiveTab('history')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0.5 pt-1"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
         >
           <HistoryIconCustom active={activeTab === 'history'} />
           <span className={`text-[9px] font-medium transition-colors ${activeTab === 'history' ? 'text-white' : 'text-[#7b7b7b]'}`}>
@@ -523,7 +523,7 @@ export const Dashboard: React.FC = () => {
         {/* Меню */}
         <button 
           onClick={() => setActiveTab('menu')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0.5 pt-1"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
         >
           <MenuIconCustom active={activeTab === 'menu'} />
           <span className={`text-[9px] font-medium transition-colors ${activeTab === 'menu' ? 'text-white' : 'text-[#7b7b7b]'}`}>

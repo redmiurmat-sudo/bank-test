@@ -10,25 +10,20 @@ import {
   CreditCard, 
   ArrowRightLeft, 
   PiggyBank, 
-  History as HistoryIcon, 
-  LayoutGrid, 
   UserCircle2,
   ScanQrCode,
-  LayoutDashboard,
   Trash2,
   CheckCircle2,
   ChevronDown,
   Calendar,
-  Wallet,
-  Clock
+  Wallet
 } from 'lucide-react';
-import { QRScanner } from './QRScanner';
-import { TransferByQR } from './TransferByQR';
-import { Transaction } from '../types';
+import { QRScanner } from './QRScanner.tsx';
+import { TransferByQR } from './TransferByQR.tsx';
+import { Transaction } from '../types.ts';
 
-// Кастомные иконки, соответствующие референсу
 const HomeIconCustom = ({ active }: { active: boolean }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
     <path 
       d="M12 4C10.5 4 8.5 5 7.5 7.5C6.5 10 7.5 13 11 15C12 15.5 13 15.5 14 15C17.5 13 18.5 10 17.5 7.5C16.5 5 14.5 4 13 4C12.7 4 12.3 4 12 4ZM12 13C10 12 9.5 10 10 8.5C10.5 7 12 7 12.5 7C13 7 14.5 7 15 8.5C15.5 10 15 12 13 13C12.7 13.2 12.3 13.2 12 13Z" 
       fill="currentColor" 
@@ -37,14 +32,14 @@ const HomeIconCustom = ({ active }: { active: boolean }) => (
 );
 
 const HistoryIconCustom = ({ active }: { active: boolean }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
     <path d="M12 7V12L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const MenuIconCustom = ({ active }: { active: boolean }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={active ? "text-white" : "text-[#7b7b7b]"}>
     <rect x="6" y="6" width="5" height="5" rx="1.5" stroke="currentColor" strokeWidth="2" />
     <rect x="13" y="6" width="5" height="5" rx="1.5" stroke="currentColor" strokeWidth="2" />
     <rect x="6" y="13" width="5" height="5" rx="1.5" stroke="currentColor" strokeWidth="2" />
@@ -77,26 +72,6 @@ export const Dashboard: React.FC = () => {
       title: 'Оплата по QR',
       amount: 30,
       date: new Date(2023, 11, 28, 20, 53),
-      requisite: 'ЭК 996555045054',
-      category: 'Все категории',
-      status: 'success'
-    },
-    {
-      id: '3',
-      type: 'qr',
-      title: 'Оплата по QR',
-      amount: 70,
-      date: new Date(2023, 11, 28, 19, 52),
-      requisite: 'ЭК 996555045054',
-      category: 'Все категории',
-      status: 'success'
-    },
-    {
-      id: '4',
-      type: 'piggybank',
-      title: 'Копилка',
-      amount: 3,
-      date: new Date(2023, 11, 28, 18, 44),
       requisite: 'ЭК 996555045054',
       category: 'Все категории',
       status: 'success'
@@ -162,7 +137,6 @@ export const Dashboard: React.FC = () => {
 
   const renderHome = () => (
     <>
-      {/* Cards Section */}
       <section className="px-4 mt-4">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-[19px] font-bold">Карты</h2>
@@ -203,7 +177,6 @@ export const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Tabs */}
       <div className="px-4 mt-6">
         <div className="flex bg-[#121212] rounded-[18px] p-0.5 h-[42px] items-center">
           <button className="flex-1 h-full rounded-[16px] bg-[#2a2a2a] text-[13px] font-medium text-white flex items-center justify-center shadow-sm">
@@ -215,7 +188,6 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Recent Grid */}
       <div className="grid grid-cols-4 gap-2 px-4 mt-6">
         {[
           { icon: <CreditCard className="w-5 h-5 text-white" />, label: "Компаньон", color: "bg-[#1d4ed8]" },
@@ -232,7 +204,6 @@ export const Dashboard: React.FC = () => {
         ))}
       </div>
 
-      {/* Products & Services */}
       <section className="px-4 mt-8">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-[19px] font-bold">Продукты и услуги</h2>
@@ -274,20 +245,9 @@ export const Dashboard: React.FC = () => {
       grouped[dateKey].push(tx);
     });
 
-    const startDate = new Date();
-    const endDate = new Date();
-    endDate.setDate(startDate.getDate() + 20);
-
-    const formatDate = (date: Date) => {
-      return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-    };
-
-    const periodString = `${formatDate(startDate)} - ${formatDate(endDate)}`;
-
     return (
       <div className="px-4 mt-2 pb-10 animate-in fade-in duration-300">
         <h2 className="text-2xl font-bold mb-6">История</h2>
-
         <div className="flex gap-4 mb-6">
           <button className="flex items-center gap-1 text-sm font-medium">
             Все источники <ChevronDown className="w-4 h-4 text-gray-600" />
@@ -297,20 +257,6 @@ export const Dashboard: React.FC = () => {
           </button>
         </div>
 
-        {/* Period Selector */}
-        <div className="bg-[#121212] rounded-2xl p-4 flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <div className="bg-green-500/10 p-2 rounded-lg">
-              <Calendar className="w-5 h-5 text-green-500" />
-            </div>
-            <span className="text-sm font-medium text-gray-300">Период</span>
-          </div>
-          <div className="bg-white rounded-full px-3 py-1.5 text-[11px] font-bold text-black uppercase">
-            {periodString}
-          </div>
-        </div>
-
-        {/* Transactions List */}
         <div className="space-y-8">
           {Object.entries(grouped).map(([date, txs]) => (
             <div key={date}>
@@ -335,16 +281,10 @@ export const Dashboard: React.FC = () => {
                         <span className="text-[11px] text-gray-500 font-medium">
                           {tx.category} &nbsp; {tx.date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
                         </span>
-                        {tx.requisite && (
-                          <div className="mt-2.5 bg-black/40 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider w-fit text-gray-300">
-                            {tx.requisite}
-                          </div>
-                        )}
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-3.5">
                       <span className="text-sm font-bold">-{tx.amount} <span className="underline underline-offset-4 decoration-gray-600">C</span></span>
-                      <span className="text-[10px] text-gray-600 font-medium">Успешный платёж</span>
                     </div>
                   </div>
                 ))}
@@ -359,7 +299,6 @@ export const Dashboard: React.FC = () => {
   const renderMenu = () => (
     <div className="px-4 mt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
       <h2 className="text-[19px] font-bold mb-4">Настройка оплаты</h2>
-      
       <div className="text-xs text-gray-500 mb-3 font-medium uppercase tracking-wider">Добавить новые реквизиты</div>
       <div className="flex gap-2 mb-8">
         <input 
@@ -377,63 +316,11 @@ export const Dashboard: React.FC = () => {
           <Plus className="w-5 h-5" />
         </button>
       </div>
-
-      <div className="text-xs text-gray-500 mb-3 font-medium uppercase tracking-wider">Выберите реквизит для оплаты по QR</div>
-      <div className="space-y-2.5">
-        {requisites.map((req, i) => (
-          <div 
-            key={i} 
-            onClick={() => handleSelectRequisite(i)}
-            className={`group cursor-pointer rounded-xl p-4 flex justify-between items-center border transition-all duration-200 ${
-              selectedReqIndex === i 
-                ? 'bg-blue-600/10 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.1)]' 
-                : 'bg-[#121212] border-white/5 hover:border-white/10'
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                selectedReqIndex === i ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-500'
-              }`}>
-                {selectedReqIndex === i ? (
-                  <CheckCircle2 className="w-5 h-5" />
-                ) : (
-                  <span className="text-xs font-bold">{i + 1}</span>
-                )}
-              </div>
-              <span className={`font-medium text-sm tracking-wide transition-colors ${
-                selectedReqIndex === i ? 'text-white' : 'text-gray-300'
-              }`}>{req}</span>
-            </div>
-            
-            <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                removeRequisite(i);
-              }} 
-              className="p-2 text-gray-600 hover:text-red-500 transition-colors active:scale-90"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-          </div>
-        ))}
-        {requisites.length === 0 && (
-          <div className="text-center py-12 bg-[#121212] rounded-2xl border border-dashed border-white/5">
-            <div className="text-gray-600 text-sm mb-1">Список пуст</div>
-            <div className="text-gray-700 text-xs">Добавьте реквизиты выше</div>
-          </div>
-        )}
-      </div>
-
-      <div className="mt-8 p-4 bg-blue-600/5 rounded-2xl border border-blue-500/10">
-        <div className="text-[11px] text-blue-500/60 uppercase font-bold mb-1">Активный реквизит:</div>
-        <div className="text-sm font-semibold">{requisites[selectedReqIndex] || 'Не выбрано'}</div>
-      </div>
     </div>
   );
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white font-sans overflow-y-auto pb-20 selection:bg-blue-500/30">
-      {/* Top Header */}
+    <div className="flex flex-col h-screen bg-black text-white font-sans overflow-y-auto pb-16 selection:bg-blue-500/30">
       {activeTab !== 'history' && (activeTab !== 'payments') && (
         <header className="flex items-center justify-between px-4 pt-3 pb-1 shrink-0">
           <div className="flex items-center gap-2">
@@ -443,17 +330,6 @@ export const Dashboard: React.FC = () => {
             <span className="text-[17px] font-medium">Март</span>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex -space-x-1.5">
-              <div className="w-6 h-6 rounded-full bg-blue-400 border border-black flex items-center justify-center overflow-hidden">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" className="w-full h-full" alt="av" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-green-400 border border-black flex items-center justify-center overflow-hidden">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" className="w-full h-full" alt="av" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-[#facc15] border border-black flex items-center justify-center text-[8px] text-black font-bold">
-                +9
-              </div>
-            </div>
             <Search className="w-5 h-5 text-gray-400" />
             <Bell className="w-5 h-5 text-gray-400" />
           </div>
@@ -468,15 +344,15 @@ export const Dashboard: React.FC = () => {
         )}
       </main>
 
-      {/* REFINED NAVIGATION BAR - MAXIMUM LOWERED POSITION */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-[#212121] border-t border-white/[0.03] px-1 pt-0.5 pb-0 flex justify-between items-end z-50 h-[64px]">
+      {/* REFINED NAVIGATION BAR - MAXIMUM LOWERED (THRESHOLD) */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-[#212121] border-t border-white/[0.03] px-1 pb-0 flex justify-between items-end z-50 h-[56px]">
         {/* Главная */}
         <button 
           onClick={() => setActiveTab('home')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pb-1"
         >
           <HomeIconCustom active={activeTab === 'home'} />
-          <span className={`text-[9px] font-medium transition-colors ${activeTab === 'home' ? 'text-white' : 'text-[#7b7b7b]'}`}>
+          <span className={`text-[8.5px] font-medium transition-colors ${activeTab === 'home' ? 'text-white' : 'text-[#7b7b7b]'}`}>
             Главная
           </span>
         </button>
@@ -484,21 +360,21 @@ export const Dashboard: React.FC = () => {
         {/* Платежи */}
         <button 
           onClick={() => setActiveTab('payments')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pb-1"
         >
-          <Wallet className={`w-5.5 h-5.5 ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`} />
-          <span className={`text-[9px] font-medium transition-colors ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`}>
+          <Wallet className={`w-5 h-5 ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`} />
+          <span className={`text-[8.5px] font-medium transition-colors ${activeTab === 'payments' ? 'text-white' : 'text-[#7b7b7b]'}`}>
             Платежи
           </span>
         </button>
         
-        {/* QR-код (Center) - Lowered relative offset */}
-        <div className="flex flex-col items-center flex-1 relative -top-1.5">
+        {/* QR-код (Center) - Lowered even more */}
+        <div className="flex flex-col items-center flex-1 relative -top-1">
           <button 
             onClick={() => setShowScanner(true)}
-            className="bg-[#2264f1] w-[58px] h-[58px] rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.4)] active:scale-95 transition-transform"
+            className="bg-[#2264f1] w-[54px] h-[54px] rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
           >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                <path d="M4 8V4H8M16 4H20V8M20 16V20H16M8 20H4V16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                <rect x="9" y="9" width="2" height="2" rx="0.5" fill="currentColor"/>
                <rect x="13" y="9" width="2" height="2" rx="0.5" fill="currentColor"/>
@@ -506,16 +382,16 @@ export const Dashboard: React.FC = () => {
                <rect x="13" y="13" width="2" height="2" rx="0.5" fill="currentColor"/>
             </svg>
           </button>
-          <span className="text-[9px] font-medium text-[#7b7b7b] mt-0.5">QR-код</span>
+          <span className="text-[8.5px] font-medium text-[#7b7b7b] mt-0.5">QR-код</span>
         </div>
 
         {/* История */}
         <button 
           onClick={() => setActiveTab('history')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pb-1"
         >
           <HistoryIconCustom active={activeTab === 'history'} />
-          <span className={`text-[9px] font-medium transition-colors ${activeTab === 'history' ? 'text-white' : 'text-[#7b7b7b]'}`}>
+          <span className={`text-[8.5px] font-medium transition-colors ${activeTab === 'history' ? 'text-white' : 'text-[#7b7b7b]'}`}>
             История
           </span>
         </button>
@@ -523,10 +399,10 @@ export const Dashboard: React.FC = () => {
         {/* Меню */}
         <button 
           onClick={() => setActiveTab('menu')}
-          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pt-0.5"
+          className="flex flex-col items-center flex-1 transition-all h-full justify-center gap-0 pb-1"
         >
           <MenuIconCustom active={activeTab === 'menu'} />
-          <span className={`text-[9px] font-medium transition-colors ${activeTab === 'menu' ? 'text-white' : 'text-[#7b7b7b]'}`}>
+          <span className={`text-[8.5px] font-medium transition-colors ${activeTab === 'menu' ? 'text-white' : 'text-[#7b7b7b]'}`}>
             Меню
           </span>
         </button>

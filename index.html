@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PIN Entry</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>банкНО — ПИН-код</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -16,6 +16,10 @@
             padding: 0;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
+        }
+        #root {
+            height: 100vh;
+            width: 100vw;
         }
     </style>
 <script type="importmap">
@@ -33,10 +37,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- 
-      Критическое исправление: Добавлен тег подключения основного скрипта. 
-      Без него приложение не инициализируется, оставляя экран пустым.
-    -->
-    <script type="module" src="index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

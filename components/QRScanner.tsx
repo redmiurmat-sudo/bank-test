@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, Zap, Image as ImageIcon, LayoutGrid } from 'lucide-react';
 
 interface QRScannerProps {
@@ -9,20 +9,31 @@ interface QRScannerProps {
 
 export const QRScanner: React.FC<QRScannerProps> = ({ onClose, onGalleryClick }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [permissionGranted, setPermissionGranted] = useState<boolean | null>(null);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
 
     const startCamera = async () => {
       try {
+        // Explicitly check for mediaDevices support to avoid "black screen" on unsupported environments
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          console.warn("Camera API not supported");
+          setPermissionGranted(false);
+          return;
+        }
+
         stream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: 'environment' }
         });
+        
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          setPermissionGranted(true);
         }
       } catch (err) {
         console.error("Error accessing camera:", err);
+        setPermissionGranted(false);
       }
     };
 
@@ -37,15 +48,15 @@ export const QRScanner: React.FC<QRScannerProps> = ({ onClose, onGalleryClick })
 
   return (
     <div className="fixed inset-0 z-[100] bg-black overflow-hidden">
-      {/* Camera Feed */}
+      {/* Camera Feed - Only shown if permission is granted */}
       <video
         ref={videoRef}
         autoPlay
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${permissionGranted ? 'opacity-100' : 'opacity-0'}`}
       />
 
-      {/* Dark Overlay with transparent center */}
+      {/* Dark Overlay with transparent center (Visible even if camera is off) */}
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
       {/* Top Buttons */}
@@ -73,7 +84,7 @@ export const QRScanner: React.FC<QRScannerProps> = ({ onClose, onGalleryClick })
 
       {/* Instruction text - Moved Higher */}
       <div className="absolute top-1/2 mt-40 left-0 right-0 text-center text-white/90 text-sm font-normal tracking-wide px-4 pointer-events-none">
-        Наведите камеру на QR-код
+        {permissionGranted === false ? 'Доступ к камере отклонен' : 'Наведите камеру на QR-код'}
       </div>
 
       {/* Bottom Buttons */}

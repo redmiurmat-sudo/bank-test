@@ -22,9 +22,9 @@ import {
   Wallet,
   Clock
 } from 'lucide-react';
-import { QRScanner } from './QRScanner';
-import { TransferByQR } from './TransferByQR';
-import { Transaction } from '../types';
+import { QRScanner } from './QRScanner.tsx';
+import { TransferByQR } from './TransferByQR.tsx';
+import { Transaction } from '../types.ts';
 
 // Custom icons matching the reference image style
 const HomeIconCustom = ({ active }: { active: boolean }) => (

@@ -22,6 +22,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
         .initial-loader {
             color: #3b82f6;
@@ -33,23 +34,51 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        .error-overlay {
+            color: #ef4444;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            background: rgba(255,0,0,0.1);
+            border: 1px solid rgba(255,0,0,0.2);
+            border-radius: 8px;
+            max-width: 90%;
+        }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@19.0.0",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.460.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.460.0?external=react",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
+    <script>
+        // Перехват критических ошибок до загрузки React
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            const root = document.getElementById('root');
+            if (root) {
+                root.innerHTML = `
+                    <div class="error-overlay">
+                        <strong>Ошибка загрузки:</strong><br>
+                        ${msg}<br>
+                        <small>Строка: ${lineNo}</small>
+                    </div>
+                `;
+            }
+            return false;
+        };
+    </script>
 </head>
 <body>
     <div id="root">
-        <div class="initial-loader">Вход в систему...</div>
+        <div class="initial-loader">Запуск приложения...</div>
     </div>
+    <!-- Явный вызов модуля для GitHub Pages -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

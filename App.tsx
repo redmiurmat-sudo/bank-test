@@ -1,10 +1,9 @@
-
 import React, { useState, useCallback } from 'react';
 import { LogOut, User } from 'lucide-react';
-import { PinDots } from './components/PinDots';
-import { Keypad } from './components/Keypad';
-import { Dashboard } from './components/Dashboard';
-import { KeyValue } from './types';
+import { PinDots } from './components/PinDots.tsx';
+import { Keypad } from './components/Keypad.tsx';
+import { Dashboard } from './components/Dashboard.tsx';
+import { KeyValue } from './types.ts';
 
 const MAX_PIN_LENGTH = 4;
 

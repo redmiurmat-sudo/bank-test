@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Delete } from 'lucide-react';
-import { KeyValue } from '../types.ts';
+import { KeyValue } from '../types';
 
 interface KeypadProps {
   onKeyPress: (key: KeyValue) => void;
